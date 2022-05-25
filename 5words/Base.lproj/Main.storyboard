@@ -104,6 +104,14 @@
                                 <nil key="textColor"/>
                                 <color key="highlightedColor" systemColor="linkColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="debug" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39g-1r-n5f">
+                                <rect key="frame" x="118" y="673" width="176" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemGreenColor"/>
@@ -135,6 +143,7 @@
                         <outlet property="Label3" destination="T6C-jb-ses" id="aRz-B3-B1X"/>
                         <outlet property="Label4" destination="KsT-lt-LBN" id="x1Q-0A-xmb"/>
                         <outlet property="Label5" destination="Ocp-DC-qWS" id="UUE-1f-VB5"/>
+                        <outlet property="debugLab" destination="39g-1r-n5f" id="pHO-Aa-9ad"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
