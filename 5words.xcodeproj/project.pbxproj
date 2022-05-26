@@ -14,6 +14,7 @@
 		039C009B283AA1C1002C836F /* _words.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 039C0099283AA1C1002C836F /* _words.xcdatamodeld */; };
 		039C009D283AA1C3002C836F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 039C009C283AA1C3002C836F /* Assets.xcassets */; };
 		039C00A0283AA1C3002C836F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 039C009E283AA1C3002C836F /* LaunchScreen.storyboard */; };
+		039C00AB283F701F002C836F /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039C00AA283F701F002C836F /* model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		039C009C283AA1C3002C836F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		039C009F283AA1C3002C836F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		039C00A1283AA1C3002C836F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		039C00AA283F701F002C836F /* model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,7 @@
 		039C0084283AA1C1002C836F = {
 			isa = PBXGroup;
 			children = (
+				039C00AA283F701F002C836F /* model.swift */,
 				039C008F283AA1C1002C836F /* 5words */,
 				039C008E283AA1C1002C836F /* Products */,
 			);
@@ -86,6 +89,8 @@
 			dependencies = (
 			);
 			name = 5words;
+			packageProductDependencies = (
+			);
 			productName = 5words;
 			productReference = 039C008D283AA1C1002C836F /* 5words.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +119,8 @@
 				Base,
 			);
 			mainGroup = 039C0084283AA1C1002C836F;
+			packageReferences = (
+			);
 			productRefGroup = 039C008E283AA1C1002C836F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -141,6 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				039C00AB283F701F002C836F /* model.swift in Sources */,
 				039C0095283AA1C1002C836F /* ViewController.swift in Sources */,
 				039C009B283AA1C1002C836F /* _words.xcdatamodeld in Sources */,
 				039C0091283AA1C1002C836F /* AppDelegate.swift in Sources */,

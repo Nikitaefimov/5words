@@ -28,7 +28,7 @@ class ViewController: UIViewController {
     @IBOutlet var Label7: UILabel!
     
     @IBOutlet var Label8: UILabel!
-    
+        
     @IBOutlet var Label9: UILabel!
     
     @IBOutlet var Label10: UILabel!
@@ -69,13 +69,49 @@ class ViewController: UIViewController {
     
     @IBOutlet var StartNewGameButtonOutlet: UIButton!
     
+    var questWord = ""
+    
     @IBAction func StartNewGameButton(_ sender: UIButton) {
         prepareNewGame()
+        getQuestword()
     }
     
     
+    func getQuestword() {
+        
+        var isWordFound = false
+        
+        guard let url = URL(string: "https://fish-text.ru/get?type=paragraph&format=json") else{ return }
+        let session = URLSession.shared
+        session.dataTask(with: url) {(data,response,error) in
+            guard let data = data else {
+                return
+            }
+            do{
+                let json = try JSONSerialization.jsonObject(with: data)
+                do {
+                    let sentense = try JSONDecoder().decode(Sentense.self, from: data)
+                    let fullSentence = sentense.text.components(separatedBy: " ")
+                    for word in fullSentence {
+                        if (word.count == 5 && !word.contains("-") && !word.contains(":") && !word.contains(".") && !word.contains(",")) {
+                            isWordFound = true
+                            self.questWord = word
+                            print(self.questWord)
+                        }
+                    }
+                    
+                } catch{
+                    print(error)
+                }
+                
+                
+            } catch {print(error)}
+
+        }.resume()
+    }
     
     var count = 0;
+        
     
     func prepareNewGame(){
         count = 0
@@ -155,12 +191,13 @@ class ViewController: UIViewController {
     
     
     @IBAction func SubmitButton(_ sender: UIButton) {
+        debugLab.text = questWord
         switch count {
-        case 0: fillLabels(questWord: "12345", label1: Label1, label2: Label2, label3: Label3, label4: Label4, label5: Label5)
-        case 1: fillLabels(questWord: "12345", label1: Label6, label2: Label7, label3: Label8, label4: Label9, label5: Label10)
-        case 2: fillLabels(questWord: "12345", label1: Label11, label2: Label12, label3: Label13, label4: Label14, label5: Label15)
-        case 3: fillLabels(questWord: "12345", label1: Label16, label2: Label17, label3: Label18, label4: Label19, label5: Label20)
-        case 4: fillLabels(questWord: "12345", label1: Label21, label2: Label22, label3: Label23, label4: Label24, label5: Label25)
+        case 0: fillLabels(questWord: questWord, label1: Label1, label2: Label2, label3: Label3, label4: Label4, label5: Label5)
+        case 1: fillLabels(questWord: questWord, label1: Label6, label2: Label7, label3: Label8, label4: Label9, label5: Label10)
+        case 2: fillLabels(questWord: questWord, label1: Label11, label2: Label12, label3: Label13, label4: Label14, label5: Label15)
+        case 3: fillLabels(questWord: questWord, label1: Label16, label2: Label17, label3: Label18, label4: Label19, label5: Label20)
+        case 4: fillLabels(questWord: questWord, label1: Label21, label2: Label22, label3: Label23, label4: Label24, label5: Label25)
             if (!checkRowColor(label1: Label21, label2: Label22, label3: Label23, label4: Label24, label5: Label25)) {
                 InfoLabel.text = "Вы проиграли("
                 StartNewGameButtonOutlet.isHidden = false
@@ -176,7 +213,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        
     }
 
 
