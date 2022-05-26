@@ -23,69 +23,155 @@ class ViewController: UIViewController {
     
     @IBOutlet var Label5: UILabel!
     
-    func fillLabels(label1: UILabel, label2: UILabel, label3: UILabel, label4: UILabel, label5: UILabel ) {
+    @IBOutlet var Label6: UILabel!
+    
+    @IBOutlet var Label7: UILabel!
+    
+    @IBOutlet var Label8: UILabel!
+    
+    @IBOutlet var Label9: UILabel!
+    
+    @IBOutlet var Label10: UILabel!
+    
+    @IBOutlet var Label11: UILabel!
+    
+    @IBOutlet var Label12: UILabel!
+    
+    @IBOutlet var Label13: UILabel!
+    
+    @IBOutlet var Label14: UILabel!
         
+    @IBOutlet var Label15: UILabel!
+    
+    @IBOutlet var Label16: UILabel!
+    
+    @IBOutlet var Label17: UILabel!
+    
+    @IBOutlet var Label18: UILabel!
+    
+    @IBOutlet var Label19: UILabel!
+    
+    @IBOutlet var Label20: UILabel!
+    
+    @IBOutlet var Label21: UILabel!
+    
+    @IBOutlet var Label22: UILabel!
+    
+    @IBOutlet var Label23: UILabel!
+    
+    @IBOutlet var Label24: UILabel!
+    
+    @IBOutlet var Label25: UILabel!
+    
+    @IBOutlet var allLabels: [UILabel]!
+    
+    @IBOutlet var SubmitButtonOutlet: UIButton!
+    
+    @IBOutlet var StartNewGameButtonOutlet: UIButton!
+    
+    @IBAction func StartNewGameButton(_ sender: UIButton) {
+        prepareNewGame()
     }
     
-    @IBAction func SubmitButton(_ sender: UIButton) {
-        
-        let questWord = "coolm"
+    
+    
+    var count = 0;
+    
+    func prepareNewGame(){
+        count = 0
+        for label in allLabels {
+            label.backgroundColor = UIColor.blue
+            label.text = ""
+        }
+        InfoLabel.text = "Введите слово из 5 букв"
+        StartNewGameButtonOutlet.isHidden = true
+        SubmitButtonOutlet.isHidden = false
+    }
+    
+    func checkRowColor(label1: UILabel, label2: UILabel, label3: UILabel, label4: UILabel, label5: UILabel) -> Bool {
+        var allGreen: Bool = false
+        if(label1.backgroundColor == UIColor.green && label2.backgroundColor == UIColor.green && label3.backgroundColor == UIColor.green && label4.backgroundColor == UIColor.green
+           && label5.backgroundColor == UIColor.green) {allGreen = true}
+        return allGreen
+    }
+    
+    func fillLabels(questWord: String, label1: UILabel, label2: UILabel, label3: UILabel, label4: UILabel, label5: UILabel) {
         var moddifiedQuestWord = questWord
         var word: String = ""
         word = Input.text ?? ""
-        
         if (word.count < 5 || word.count > 5) {
             InfoLabel.text = "Введите корректное слово"
         } else {
             var first = String.Index(encodedOffset: 1)
             if (word.substring(to: first)) == (moddifiedQuestWord.substring(to: first)) {
-                Label1.backgroundColor = UIColor.green
+                label1.backgroundColor = UIColor.green
             } else if questWord.contains(word.substring(to: first)) {
-                Label1.backgroundColor = UIColor.yellow
-            } else {Label1.backgroundColor = UIColor.blue}
-            Label1.text = word.substring(to: first)
+                label1.backgroundColor = UIColor.yellow
+            } else {label1.backgroundColor = UIColor.blue}
+            label1.text = word.substring(to: first)
             let removefirst = String.Index(encodedOffset: 0)
             word.remove(at: removefirst)
             moddifiedQuestWord.remove(at: removefirst)
             if (word.substring(to: first)) == (moddifiedQuestWord.substring(to: first)) {
-                Label2.backgroundColor = UIColor.green
+                label2.backgroundColor = UIColor.green
             } else if questWord.contains(word.substring(to: first)) {
-                Label2.backgroundColor = UIColor.yellow
-            } else {Label2.backgroundColor = UIColor.blue}
-            Label2.text = word.substring(to: first)
+                label2.backgroundColor = UIColor.yellow
+            } else {label2.backgroundColor = UIColor.blue}
+            label2.text = word.substring(to: first)
             word.remove(at: removefirst)
             moddifiedQuestWord.remove(at: removefirst)
             if (word.substring(to: first)) == (moddifiedQuestWord.substring(to: first)) {
-                Label3.backgroundColor = UIColor.green
+                label3.backgroundColor = UIColor.green
             } else if questWord.contains(word.substring(to: first)) {
-                Label3.backgroundColor = UIColor.yellow
-            } else {Label3.backgroundColor = UIColor.blue}
-            Label3.text = word.substring(to: first)
+                label3.backgroundColor = UIColor.yellow
+            } else {label3.backgroundColor = UIColor.blue}
+            label3.text = word.substring(to: first)
             word.remove(at: removefirst)
             moddifiedQuestWord.remove(at: removefirst)
             if (word.substring(to: first)) == (moddifiedQuestWord.substring(to: first)) {
-                Label4.backgroundColor = UIColor.green
+                label4.backgroundColor = UIColor.green
             } else if questWord.contains(word.substring(to: first)) {
-                Label4.backgroundColor = UIColor.yellow
-            } else {Label4.backgroundColor = UIColor.blue}
-            Label4.text = word.substring(to: first)
+                label4.backgroundColor = UIColor.yellow
+            } else {label4.backgroundColor = UIColor.blue}
+            label4.text = word.substring(to: first)
             word.remove(at: removefirst)
             moddifiedQuestWord.remove(at: removefirst)
             if (word.substring(to: first)) == (moddifiedQuestWord.substring(to: first)) {
-                Label5.backgroundColor = UIColor.green
+                label5.backgroundColor = UIColor.green
             } else if questWord.contains(word.substring(to: first)) {
-                Label5.backgroundColor = UIColor.yellow
-            } else {Label5.backgroundColor = UIColor.blue}
-            Label5.text = word.substring(to: first)
+                label5.backgroundColor = UIColor.yellow
+            } else {label5.backgroundColor = UIColor.blue}
+            label5.text = word.substring(to: first)
             
             InfoLabel.text = "Введите слово из 5 букв"
-    
-            
+            count+=1
+            if(checkRowColor(label1: label1, label2: label2, label3: label3, label4: label4, label5: label5)) {
+                StartNewGameButtonOutlet.isHidden = false
+                InfoLabel.text = "Вы победили!"
+                SubmitButtonOutlet.isHidden = true
+            }
         }
-        
     }
     
-
+    
+    @IBAction func SubmitButton(_ sender: UIButton) {
+        switch count {
+        case 0: fillLabels(questWord: "12345", label1: Label1, label2: Label2, label3: Label3, label4: Label4, label5: Label5)
+        case 1: fillLabels(questWord: "12345", label1: Label6, label2: Label7, label3: Label8, label4: Label9, label5: Label10)
+        case 2: fillLabels(questWord: "12345", label1: Label11, label2: Label12, label3: Label13, label4: Label14, label5: Label15)
+        case 3: fillLabels(questWord: "12345", label1: Label16, label2: Label17, label3: Label18, label4: Label19, label5: Label20)
+        case 4: fillLabels(questWord: "12345", label1: Label21, label2: Label22, label3: Label23, label4: Label24, label5: Label25)
+            if (!checkRowColor(label1: Label21, label2: Label22, label3: Label23, label4: Label24, label5: Label25)) {
+                InfoLabel.text = "Вы проиграли("
+                StartNewGameButtonOutlet.isHidden = false
+                SubmitButtonOutlet.isHidden = true
+            }
+            
+        default:
+            print("err")
+        }
+    }
+    
     @IBOutlet var Input: UITextField!
     
     override func viewDidLoad() {
