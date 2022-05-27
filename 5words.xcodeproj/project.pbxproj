@@ -15,6 +15,7 @@
 		039C009D283AA1C3002C836F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 039C009C283AA1C3002C836F /* Assets.xcassets */; };
 		039C00A0283AA1C3002C836F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 039C009E283AA1C3002C836F /* LaunchScreen.storyboard */; };
 		039C00AB283F701F002C836F /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039C00AA283F701F002C836F /* model.swift */; };
+		039C00AE28409854002C836F /* random-swift in Frameworks */ = {isa = PBXBuildFile; productRef = 039C00AD28409854002C836F /* random-swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				039C00AE28409854002C836F /* random-swift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +92,7 @@
 			);
 			name = 5words;
 			packageProductDependencies = (
+				039C00AD28409854002C836F /* random-swift */,
 			);
 			productName = 5words;
 			productReference = 039C008D283AA1C1002C836F /* 5words.app */;
@@ -120,6 +123,7 @@
 			);
 			mainGroup = 039C0084283AA1C1002C836F;
 			packageReferences = (
+				039C00AC28409854002C836F /* XCRemoteSwiftPackageReference "random-swift" */,
 			);
 			productRefGroup = 039C008E283AA1C1002C836F /* Products */;
 			projectDirPath = "";
@@ -368,6 +372,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		039C00AC28409854002C836F /* XCRemoteSwiftPackageReference "random-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/GigabiteLabs/random-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		039C00AD28409854002C836F /* random-swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 039C00AC28409854002C836F /* XCRemoteSwiftPackageReference "random-swift" */;
+			productName = "random-swift";
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		039C0099283AA1C1002C836F /* _words.xcdatamodeld */ = {

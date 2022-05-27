@@ -6,6 +6,7 @@
 //
 
 import UIKit
+@_exported import random_swift
 
 class ViewController: UIViewController {
     
@@ -70,6 +71,7 @@ class ViewController: UIViewController {
     @IBOutlet var StartNewGameButtonOutlet: UIButton!
     
     var questWord = ""
+    let randomWord = Random.word
     
     @IBAction func StartNewGameButton(_ sender: UIButton) {
         prepareNewGame()
@@ -79,41 +81,69 @@ class ViewController: UIViewController {
     
     func getQuestword() {
         
-        var isWordFound = false
         
-        guard let url = URL(string: "https://fish-text.ru/get?type=paragraph&format=json") else{ return }
-        let session = URLSession.shared
-        session.dataTask(with: url) {(data,response,error) in
-            guard let data = data else {
-                return
-            }
-            do{
-                let json = try JSONSerialization.jsonObject(with: data)
-                do {
-                    let sentense = try JSONDecoder().decode(Sentense.self, from: data)
-                    let fullSentence = sentense.text.components(separatedBy: " ")
-                    for word in fullSentence {
-                        if (word.count == 5 && !word.contains("-") && !word.contains(":") && !word.contains(".") && !word.contains(",")) {
-                            isWordFound = true
-                            self.questWord = word
-                            print(self.questWord)
+//        var isWordFound = false
+//
+//        guard let url = URL(string: "https://random-word-api.herokuapp.com/word") else{ return }
+//        let session = URLSession.shared
+//        session.dataTask(with: url) {(data,response,error) in
+//            guard let data = data else {
+//                return
+//            }
+//            print(data)
+//            do{
+//                let json = try JSONSerialization.jsonObject(with: data)
+//                do {
+//                    let sentense = try JSONDecoder().decode(Sentense.self, from: data)
+//                    let fullSentence = sentense.text.components(separatedBy: " ")
+//                    for word in fullSentence {
+//                        if (word.count == 5 && !word.contains("-") && !word.contains(":") && !word.contains(".") && !word.contains(",")) {
+//                            isWordFound = true
+//                            self.questWord = word
+//                            print(self.questWord)
+//                        }
+//                    }
+//
+//                } catch{
+//                    print(error)
+//                }
+//
+//
+//            } catch {print(error)}
+//
+//        }.resume()
+        
+        
+        
+        var isCorrect = false
+        
+        while (isCorrect == false) {
+            let text = Random.word
+            if (text.count == 5) {
+                let tagger = NSLinguisticTagger(tagSchemes: [.lexicalClass], options: 0)
+                tagger.string = text
+                let range = NSRange(location: 0, length: text.utf16.count)
+                let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace]
+                tagger.enumerateTags(in: range, unit: .word, scheme: .lexicalClass, options: options) { tag, tokenRange, _ in
+                    if let tag = tag {
+                        let word = (text as NSString).substring(with: tokenRange)
+                        if (tag.rawValue == "Noun") {
+                            questWord = word
+                            isCorrect = true
                         }
                     }
-                    
-                } catch{
-                    print(error)
                 }
-                
-                
-            } catch {print(error)}
-
-        }.resume()
+            }
+            debugLab.text = questWord
+        }
+        
     }
     
     var count = 0;
         
     
     func prepareNewGame(){
+        
         count = 0
         for label in allLabels {
             label.backgroundColor = UIColor.blue
@@ -138,7 +168,7 @@ class ViewController: UIViewController {
         if (word.count < 5 || word.count > 5) {
             InfoLabel.text = "Введите корректное слово"
         } else {
-            var first = String.Index(encodedOffset: 1)
+            let first = String.Index(encodedOffset: 1)
             if (word.substring(to: first)) == (moddifiedQuestWord.substring(to: first)) {
                 label1.backgroundColor = UIColor.green
             } else if questWord.contains(word.substring(to: first)) {
@@ -191,7 +221,6 @@ class ViewController: UIViewController {
     
     
     @IBAction func SubmitButton(_ sender: UIButton) {
-        debugLab.text = questWord
         switch count {
         case 0: fillLabels(questWord: questWord, label1: Label1, label2: Label2, label3: Label3, label4: Label4, label5: Label5)
         case 1: fillLabels(questWord: questWord, label1: Label6, label2: Label7, label3: Label8, label4: Label9, label5: Label10)
